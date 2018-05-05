@@ -1,0 +1,49 @@
+<ion-header  >
+  <ion-navbar color="dark"  >
+    <ion-title  >Login Page </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+    <ion-list>
+
+      <ion-item >
+        <ion-label floating >Username</ion-label>
+        <ion-input   type="text" value=""  [(ngModel)]="username"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" value="" [(ngModel)]="password"></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <div padding>
+      <button ion-button color="primary" block (click)='validateLogin()'>Sign In</button>
+      <div class="alert alert-danger" *ngIf="showmessageWrongPassword">
+        <!--<strong>Success!</strong> You should <a href="#" class="alert-link">read this message</a>.-->
+        <ion-label color="danger"> Wrong  password</ion-label>
+      </div>
+       <br>
+      <br>
+
+   <ion-list>
+      <a   (click)="createAccount()" class="alignleft">Create account</a>
+      <a  (click)="forgotAccount()" class="alignright">Forgot account</a>
+ 
+  </ion-list>
+
+     
+
+     
+       
+    </div>
+
+
+
+    
+
+</ion-content>
