@@ -1,0 +1,31 @@
+page-create-trip {
+  ion-content{
+    background: rgb(229, 227, 223);
+    #map {
+      width: 100%;
+      height: 250px;
+      opacity: 0;
+      transition: opacity 150ms ease-in;
+      display: block;
+      &.show-map{
+        opacity: 1;
+      }
+    }
+    .scroll{
+      height: calc(100% - 250px);
+    }
+  }
+
+}
+.alert{
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+ .alert-warning{
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+ }

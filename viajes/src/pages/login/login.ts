@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoadingController ,AlertController  } from 'ionic-angular';
 import {HomePage} from '../home/home';
+import {RegisterAccountPage} from '../register-account/register-account';
 import {UserServiceProvider} from '../../providers/user-service/user-service';
+
 
 /**
  * Generated class for the LoginPage page.
@@ -41,11 +43,17 @@ validateLogin(){
   this.presentLoading();
          this.userService.login(this.username, this.password).subscribe(
               responseUserService => {
+                console.log('paso por aqui en el validate login',responseUserService);
                 if (responseUserService) {
                   // this.loader.dismiss();
                   console.log('paso por aqui en el validate login',responseUserService);
                    this.navCtrl.setRoot(HomePage, {
-                      item: null
+                      name: responseUserService[0].name,
+                      lastname: responseUserService[0].lastname,
+                      id_user: responseUserService[0].id_user,
+                      member_active:responseUserService[0].member_active,
+                      email:responseUserService[0].email,
+                      password:responseUserService[0].password
                     });
                 }
                 else {
@@ -92,12 +100,12 @@ presentLoading() {
     alert.present();
   }
 
-//   createAccount(event, item) {
-//   	console.log('no recuerdo que es este item'+item);
-//     this.navCtrl.push( RegisterUserPage, {
-//       item: item
-//     });
-// }
+  createAccount() {
+  	// console.log('no recuerdo que es este item'+item);
+    this.navCtrl.push( RegisterAccountPage, {
+      // item: item
+    });
+}
 
 //   forgotAccount(event, item) {
 //   	console.log('no recuerdo que es este item'+item);

@@ -10,11 +10,17 @@ import { HttpModule } from '@angular/http';
 // import { HomePage } from '../pages/home/home';
 // import { LoginPage } from '../pages/login/login';
 
-import {LoginPageModule}from '../pages/login/login.module'
-import {HomePageModule}from '../pages/home/home.module'
+import {LoginPageModule}from '../pages/login/login.module';
+import {HomePageModule}from '../pages/home/home.module';
+import {RegisterAccountPageModule}from '../pages/register-account/register-account.module';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import {CreateTripPageModule} from '../pages/create-trip/create-trip.module';
+import { BasicParametersProvider } from '../providers/basic-parameters/basic-parameters';
+import { Geolocation } from '@ionic-native/geolocation';
+// import { GoogleMaps } from '@ionic-native/google-maps';
 // import { HttpClientModule } from '@angular/common/http'; 
 // import { TestProvider } from '../providers/test/test';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +35,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     IonicModule.forRoot(MyApp),
     LoginPageModule,
     HomePageModule,
+    RegisterAccountPageModule,
+    CreateTripPageModule,
     HttpModule
     // HttpClientModule
   ],
@@ -43,7 +51,12 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserServiceProvider
+    UserServiceProvider,
+    // GoogleMaps,
+    Geolocation
+    
+    ,
+    BasicParametersProvider
     // TestProvider
   ]
 })

@@ -15,9 +15,9 @@ export class UserServiceProvider {
 
    constructor(public https: Http) {
         this.http = https;
-          // this.baseUrl = 'http://localhost:3000';
+          this.baseUrl = 'http://localhost:3000';
         // this.baseUrl = 'https://morning-sierra-10830.herokuapp.com';
-        this.baseUrl = 'https://polar-river-44139.herokuapp.com';
+        // this.baseUrl = 'https://polar-river-44139.herokuapp.com';
     }
       options = new RequestOptions({
      withCredentials: true
@@ -28,6 +28,21 @@ export class UserServiceProvider {
     var credentials = { email: email, password: password};
     console.log ('llamando al api HERE ',email,password);
     return this.http.post(this.baseUrl + '/user/login', credentials,this.options).map(responseObject => {
+        if(responseObject.status == 200)
+          return responseObject.json();
+        else
+          return false;
+    });
+  }
+
+   createAccount(name,lastname,email, password) {
+    var credentials = { name: name, 
+                        lastname:lastname,
+                        email:email,
+                        password: password
+                      };
+    console.log ('llamando al api HERE ',name,lastname,email,password);
+    return this.http.post(this.baseUrl + '/user/createAccount', credentials,this.options).map(responseObject => {
         if(responseObject.status == 200)
           return responseObject.json();
         else
