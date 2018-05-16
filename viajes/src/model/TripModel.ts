@@ -1,28 +1,46 @@
 export class TripModel {
-constructor(id_user,stars,source,destino,sourcePlace,destinoPlace,plaza,foto){
-	this.id_user=id_user
-    this.stars=stars;
-    this.foto=foto;
+// constructor(costo,stars,source,destino,sourcePlace,destinoPlace,plaza,foto){
+// 	this.costo=costo
+//     this.costoComision=costoComision;
+//     this.destino=destino;
 
-    this.source = source;
-    this.destino = destino;
+//     this.destinoPlaceLat = destinoPlaceLat;
+//     this.destinoPlaceLng = destinoPlaceLng;
 
-    this.sourcePlace = sourcePlace;
-    this.destinoPlace = destinoPlace;
+//     this.hora = hora;
+//     this.id_trip = id_trip;
     
-    this.plaza=plaza;
+//     this.id_user=id_user;
+//     this.plaza=plaza;
+//     this.source=source;
+//     this.id_user=id_user;
     
-}
-    id_user:string = null;
-    stars:string=null;
-
-    source:string = null;
-    sourcePlace:string = null;
-    destino:string = null;
-    destinoPlace:string = null;
-    
+// }
+    costo:string=null;
+    costoComision:string=null;
+    destino:string=null;
+    destinoPlaceLat:string=null;
+    destinoPlaceLng:string=null;
+    hora:string=null;
+    id_trip:string=null;
+    id_user:string=null;
     plaza:string=null;
-    foto:string=null;
+    source:string=null;
+    sourcePlaceLat:string=null;
+    sourcePlaceLng:string=null;
+    status:string=null;
+    // id_user:string = null;
+    // id_trip:string=null;
+
+    // stars:string=null;
+
+    // source:string = null;
+    // sourcePlace:string = null;
+    // destino:string = null;
+    // destinoPlace:string = null;
+    
+    // plaza:string=null;
+    // foto:string=null;
     
 
 

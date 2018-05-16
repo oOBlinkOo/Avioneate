@@ -17,6 +17,9 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 import {CreateTripPageModule} from '../pages/create-trip/create-trip.module';
 import { BasicParametersProvider } from '../providers/basic-parameters/basic-parameters';
 import { Geolocation } from '@ionic-native/geolocation';
+import {NextConfigurationPageModule} from '../pages/next-configuration/next-configuration.module'
+import {DetailTripPageModule} from '../pages/detail-trip/detail-trip.module'
+import { TripServiceProvider } from '../providers/trip-service/trip-service';
 // import { GoogleMaps } from '@ionic-native/google-maps';
 // import { HttpClientModule } from '@angular/common/http'; 
 // import { TestProvider } from '../providers/test/test';
@@ -37,6 +40,9 @@ import { Geolocation } from '@ionic-native/geolocation';
     HomePageModule,
     RegisterAccountPageModule,
     CreateTripPageModule,
+    NextConfigurationPageModule,
+    DetailTripPageModule,
+
     HttpModule
     // HttpClientModule
   ],
@@ -56,7 +62,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     Geolocation
     
     ,
-    BasicParametersProvider
+    BasicParametersProvider,
+    TripServiceProvider
     // TestProvider
   ]
 })

@@ -1,7 +1,9 @@
 import { Component ,ViewChild,ElementRef} from '@angular/core';
 import { IonicPage, NavController, NavParams,Loading,LoadingController } from 'ionic-angular';
 import {basicInfoModel} from '../../model/basicInfoModel';
+import { App } from "ionic-angular";
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
+import {NextConfigurationPage} from '../next-configuration/next-configuration';
 /**
  * Generated class for the CreateTripPage page.
  *
@@ -25,11 +27,13 @@ basicInfoGlobal:basicInfoModel=null;
   myLatLng: any;
   waypoints: any[];
 
-  
+  // Merida 20.9619385,-89.60147
+  // Tizimin 21.1480604,-88.1580696
   
    @ViewChild('mycontent') mapElement: ElementRef;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
+    public appCtrl: App,
     public geolocation: Geolocation) {
   	this.basicInfoGlobal = navParams.get('basicInfoGlobal');
     this.directionsService = new google.maps.DirectionsService();
@@ -40,23 +44,15 @@ basicInfoGlobal:basicInfoModel=null;
         location: { lat: 21.1480604, lng: -88.1580696},
         stopover: true,
       }
-      // ,
-      // {
-      //   location: { lat: 20.9619385, lng: -89.62987240000001 },
-      //   stopover: true,
-      // },
-      // {
-      //   location: { lat: 20.9619385, lng: -89.62987240000001 },
-      //   stopover: true,
-      // },
-      // {
-      //   location: { lat: 20.9619385, lng: -89.62987240000001 },
-      //   stopover: true,
-      // }
     ];
 
   }
   asientosDisponibles=1;
+  showmap=false;
+  source='Mérida';
+  destino='Tizimín';
+  distancia=null;
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreateTripPage');
@@ -66,6 +62,15 @@ basicInfoGlobal:basicInfoModel=null;
 ////////////////////////////////////////////////////////////
   addAsientos(){
   	this.asientosDisponibles=this.asientosDisponibles+1;
+  }
+   changeValues(){
+    console.log('destino:',this.destino,'source',this.source);
+    var temp1=this.source;
+    var temp2=this.destino;
+
+    this.destino=temp1;
+    this.source=temp2;
+    console.log('despues:',this.destino,'source',this.source);
   }
 
   restaAsientos(){
@@ -97,8 +102,9 @@ basicInfoGlobal:basicInfoModel=null;
     let panelEle: HTMLElement = document.getElementById('panel');
 
     // create LatLng object
-    // this.myLatLng = {lat: latitude, lng: longitude};
-    this.myLatLng = {lat: 20.9619385, lng: -89.60147};
+    this.myLatLng = {lat: latitude, lng: longitude};
+    // this.myLatLng = {lat: 21.1480604, lng: -88.1580696};
+    // tizimin 21.1480604,-88.1580696
 
     // create map
     this.map = new google.maps.Map(mapEle, {
@@ -111,8 +117,27 @@ basicInfoGlobal:basicInfoModel=null;
 
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
       mapEle.classList.add('show-map');
+      
       this.calculateRoute();
     });
+  }
+
+  private validateCity(){
+
+  }
+
+  nextConfiguration(){
+      this.appCtrl.getRootNav().push(NextConfigurationPage,{
+      basicInfoGlobal:this.basicInfoGlobal,
+      distancia:this.distancia,
+      asientosDisponibles:this.asientosDisponibles,
+      destino:this.destino,
+      source:this.source,
+      sourcePlace:this.myLatLng,
+      destinoPlace:this.waypoints
+
+
+  });
   }
 
   private calculateRoute(){
@@ -137,7 +162,29 @@ basicInfoGlobal:basicInfoModel=null;
       if(status === google.maps.DirectionsStatus.OK) {
         console.log(response);
         console.log(response.routes[0].legs[0].distance);
-        this.directionsDisplay.setDirections(response);
+        console.log(response.routes[0].legs[0].start_address);
+        console.log(response.routes[0].legs[0].end_address);
+        this.distancia=response.routes[0].legs[0].distance;
+              if((response.routes[0].legs[0].start_address.includes('Mérida') && response.routes[0].legs[0].end_address.includes('Tizimín'))
+                ||(response.routes[0].legs[0].start_address.includes('Tizimín') && response.routes[0].legs[0].end_address.includes('Mérida')))
+              {
+                console.log('termino en el mejor de los casos');
+                this.directionsDisplay.setDirections(response);
+              }else {
+                console.log('problemaS!!!!!!!!!!!!!!!!!!!!!!!!');
+                this.changeValues();
+                this.waypoints = [
+                  {
+                    location: { lat: 20.9670517, lng: -89.6232899},
+                    stopover: true,
+                  }
+                ];
+                this.calculateRoute();
+              }
+
+        
+
+        
       }else{
         alert('Could not display directions due to: ' + status);
       }

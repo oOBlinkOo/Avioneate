@@ -13,11 +13,80 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class='fondo'>
 
-	  <div id="map"></div>
-  <ion-scroll scrollY="true" class="scroll">
+<ion-row *ngIf='basicInfoGlobal.member_active==0' class="alert alert-warning">
+  <ion-label>
+    Configure your account with one administrator.
+  </ion-label>
+</ion-row>
+
+<ion-row>
+  <ion-col>
+    <ion-label>Asientos Disponibles:</ion-label>  
+  </ion-col>
+  <ion-col>
+  <ion-label>{{asientosDisponibles}}</ion-label>
+    
+  </ion-col>
+  <ion-col>
+    <button ion-button icon-only clear='true' (click)='restaAsientos()'>
+    <ion-icon name='arrow-dropdown' class='white'></ion-icon>
+  </button> 
+  </ion-col>
+  <ion-col>
+    <button ion-button icon-only clear='true' (click)='addAsientos()'>
+    <ion-icon name='arrow-dropup' class='white'></ion-icon>
+  </button>
+  </ion-col>
+</ion-row>
+
+<ion-row>
+<ion-col>
+  <ion-label>
+    Getting Loc
+  </ion-label>
+</ion-col>
+
+  <ion-col>
+      <ion-label item-start>{{source}}</ion-label>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-only clear='true'>
+        <ion-icon name="arrow-dropright" class='white'></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col>
+      <ion-label item-end>{{destino}}</ion-label>
+    </ion-col>
+
+
+  
+</ion-row>
+<!-- <ion-row>
+  <ion-col>
+  
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="timeStarts"></ion-datetime>
+    
+  
+</ion-col>
+
+
+</ion-row> -->
+<ion-row>
+    <ion-col>
+      <div id="map"></div>  
+    </ion-col>
+
+</ion-row>
+
+
+	  <!-- <div id="map" *ngIf="showmap"></div> -->
+  <ion-scroll scrollY="true" class="scroll" >
     <div padding-horizontal id="panel"></div>
   </ion-scroll>
+
+<button ion-button color="primary" block *ngIf='basicInfoGlobal.member_active==1' (click)='nextConfiguration()'>lets Go</button>
+
 
 </ion-content>

@@ -19,19 +19,19 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class='fondo'>
 	<ion-row>
 		<ion-col col-2>
 			<ion-label  item-star>Start</ion-label>			
 		</ion-col>	
 		<ion-col col-4>
-			<ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="timeStarts"></ion-datetime>
+			<ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="timestartSearch" (ionChange)='dateFunction()'></ion-datetime>
 		</ion-col>	
 		<ion-col col-2>
 			<ion-label item-end>End</ion-label>	
 		</ion-col>	
 		<ion-col col-4>
-			<ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="timeEndSearch"></ion-datetime>
+			<ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="timeEndSearch" (ionChange)='dateFunction()'></ion-datetime>
 		</ion-col>	
 	</ion-row>
 	<ion-row>
@@ -40,29 +40,79 @@
 		</ion-col>
 		<ion-col col-4>
 			<button ion-button icon-only clear='true'  (click)='changeValues()'>
-				<ion-icon name="arrow-dropright-circle" color='dark'></ion-icon>
+				<ion-icon name="arrow-forward" class='white'></ion-icon>
 			</button>
 		</ion-col>
 		<ion-col col-4>
 			<ion-label item-end>{{destino}}</ion-label>
 		</ion-col>
 	</ion-row>
+	<ion-row>
+		<ion-col col-4>
+			<ion-label>Plazas:</ion-label>
+
+		</ion-col>
+		<ion-col col-1>
+			<ion-label text-center> {{numeroplazasBuscar}}</ion-label>
+			
+		</ion-col>
+		<ion-col col-7 text-right>
+			<button ion-button icon-only clear='true' (click)='restar()'> <ion-icon name="arrow-dropleft" class='white'></ion-icon> </button>
+			<button ion-button icon-only clear='true' (click)='addnew()'> <ion-icon name="arrow-dropright" class='white'></ion-icon></button>
+		</ion-col>
+	</ion-row>
 
 	<ion-list>
-		<ion-row *ngFor="let trip of groceries"> 
-			<ion-col>
-				<ion-label item-start>Parte de: {{trip.source}}</ion-label>
-				<ion-label item-start>{{trip.sourcePlace}}</ion-label>
-			</ion-col>
-			<ion-col >
-				<ion-label item-start>llega: {{trip.destino}}</ion-label>
-				<ion-label item-start>{{trip.destinoPlace}}</ion-label>
-			</ion-col>
-			<ion-col >
-				<ion-label item-start>Plaza: {{trip.plaza}}</ion-label>
-				<ion-icon name="star" color='dark'></ion-icon>
-			</ion-col>
-		</ion-row>
+			<!-- <ion-item *ngFor="let trip of groceries">
+					
+							<ion-label item-start>Parte de: {{trip.source}}</ion-label>						
+							<ion-label item-start>Plaza: {{trip.plaza}}</ion-label>
+							<ion-icon name="star" color='dark'></ion-icon>					
+							<ion-label item-start>llega: {{trip.destino}}</ion-label>
+				</ion-item> -->
+	
+			
+					<ion-row *ngFor="let trip of groceries" class='border'>
+						<ion-col (click)='openDetail(trip)'>
+									<ion-row>
+										<ion-col col-3>
+
+
+											<ion-icon name="contact" color='dark' class='userpng'></ion-icon>
+										</ion-col>
+										<ion-col col-9 >
+												<ion-row>
+													<ion-col>
+															<ion-label item-start>Parte de: {{trip.source}}</ion-label>
+													</ion-col>
+													<ion-col>
+															<ion-label item-start>Raiting</ion-label>
+													</ion-col>
+													
+												</ion-row>
+												<ion-row>
+													<ion-col>
+															<ion-label item-start>Hacia: {{trip.destino}}</ion-label>
+													</ion-col>
+													<ion-col>
+															<ion-icon name="star" color='dark'></ion-icon>
+															<!-- <ion-label item-start><ion-icon name="star" color='dark'></ion-icon></ion-label> -->
+													</ion-col>										
+												</ion-row>
+
+										</ion-col>
+										
+									</ion-row>
+
+									
+
+								
+						</ion-col>
+					
+
+
+					</ion-row>
+	
 	</ion-list>
 
 </ion-content>

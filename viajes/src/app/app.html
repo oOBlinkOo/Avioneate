@@ -3,27 +3,29 @@
           <ion-list>
           <ion-item>          	
             <ion-label (click)="createTrip()">
-             <button >
-            	<ion-icon name="car"></ion-icon>            	
+             <button ion-button icon-only clear='true'>
+            	<ion-icon name="car" color='dark'></ion-icon>            	
             </button> Create Trip
             </ion-label>
           </ion-item>
             <ion-item>
            
-            <ion-label>   <button>
-            	<ion-icon name="search"></ion-icon>            	
+            <ion-label>   <button ion-button icon-only clear='true'>
+            	<ion-icon name="search" color='dark'></ion-icon>            	
             </button> Search</ion-label>
             </ion-item>
             <ion-item>
             
-            <ion-label><button>
-            	<ion-icon name="card"></ion-icon>            	
+            <ion-label><button ion-button icon-only clear='true'>
+            	<ion-icon name="card" color='dark'></ion-icon>            	
             </button> Payments</ion-label>
             </ion-item>
           </ion-list>  
         </ion-content>
       </ion-menu>
-
+  <!-- <button ion-button icon-only clear='true' (click)='restaAsientos()'>
+    <ion-icon name='arrow-dropdown'  color='dark'></ion-icon>
+  </button>  -->
 
 <ion-nav #mycontent [root]="rootPage"></ion-nav>
 

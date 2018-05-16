@@ -21,9 +21,10 @@ import {UserServiceProvider} from '../../providers/user-service/user-service';
 export class LoginPage {
 
   constructor(public navCtrl: NavController, 
-  	public loadingCtrl: LoadingController,
+  	
     private userService: UserServiceProvider,
     public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
   	public navParams: NavParams) {
   }
   loader :any;
@@ -107,14 +108,6 @@ presentLoading() {
     });
 }
 
-//   forgotAccount(event, item) {
-//   	console.log('no recuerdo que es este item'+item);
-//     this.navCtrl.push( ForgotpasswordPage, {
-//       item: item
-//     });
-
-
-// }
 
 
 

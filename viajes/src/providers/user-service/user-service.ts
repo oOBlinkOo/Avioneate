@@ -49,4 +49,15 @@ export class UserServiceProvider {
           return false;
     });
   }
+
+  getUser(user_id) {
+      console.log('OMGGGGGGGG',user_id);
+    console.log ('llamando al api HERE ');
+    return this.http.get(this.baseUrl + '/user/getUser/'+user_id, this.options).map(responseObject => {
+        if(responseObject.status == 200)
+          return responseObject.json();
+        else
+          return false;
+    });
+  }
 }
