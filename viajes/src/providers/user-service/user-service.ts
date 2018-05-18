@@ -60,4 +60,45 @@ export class UserServiceProvider {
           return false;
     });
   }
+
+
+      createTarjeta(id_user, numeroTarjeta,vigencia,cvv) {
+    var credentials = { id_user: id_user, numeroTarjeta: numeroTarjeta ,vigencia:vigencia ,cvv:cvv};
+    console.log ('llamando al api HERE ');
+    return this.http.post(this.baseUrl + '/user/createTarjeta', credentials,this.options).map(responseObject => {
+        if(responseObject.status == 200)
+          return responseObject.json();
+        else
+          return false;
+    });
+  }
+
+    getTarjeta(user_id) {
+      console.log('OMGGGGGGGG',user_id);
+    console.log ('llamando al api HERE ');
+    return this.http.get(this.baseUrl + '/user/getTarjeta/'+user_id, this.options).map(responseObject => {
+        if(responseObject.status == 200)
+          return responseObject.json();
+        else
+          return false;
+    });
+  }
+
+        updateUser(id_user, name,lastname,password) {
+    var credentials = { id_user: id_user,
+     name: name ,
+     lastname:lastname ,
+     password:password
+   };
+    console.log ('llamando al api HERE ');
+    return this.http.post(this.baseUrl + '/user/updateUser', credentials,this.options).map(responseObject => {
+        if(responseObject.status == 200)
+          return responseObject.json();
+        else
+          return false;
+    });
+  }
+
+
+
 }

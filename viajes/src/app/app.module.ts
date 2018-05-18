@@ -20,6 +20,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import {NextConfigurationPageModule} from '../pages/next-configuration/next-configuration.module'
 import {DetailTripPageModule} from '../pages/detail-trip/detail-trip.module'
 import { TripServiceProvider } from '../providers/trip-service/trip-service';
+import {TarjetaPageModule} from '../pages/tarjeta/tarjeta.module'
+import {PerfilPageModule} from '../pages/perfil/perfil.module'
 // import { GoogleMaps } from '@ionic-native/google-maps';
 // import { HttpClientModule } from '@angular/common/http'; 
 // import { TestProvider } from '../providers/test/test';
@@ -42,6 +44,8 @@ import { TripServiceProvider } from '../providers/trip-service/trip-service';
     CreateTripPageModule,
     NextConfigurationPageModule,
     DetailTripPageModule,
+    TarjetaPageModule,
+    PerfilPageModule,
 
     HttpModule
     // HttpClientModule

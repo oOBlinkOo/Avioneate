@@ -45,32 +45,12 @@ export class HomePage {
      x.password=this.password;
      x.member_active=this.member_active;
      x.email=this.email;
-     this.setHour();
+     
      this.basicParametersProvider.confirmMission(x);
+     this.setHour();
      this.activarfiltro();
-     console.log('entro al constructor');
 
-
-   // var xs = new TripModel();
-                      
-   //                      xs.costo='20'
-   //                      xs.costoComision='25'
-   //                      xs.destino="Merida"
-   //                      xs.destinoPlaceLat='43343434'
-   //                      xs.destinoPlaceLng='-3434343'
-   //                      xs.hora="2018/20/02 20:20:00"
-   //                      xs.id_trip='54'
-   //                      xs.id_user='2'
-   //                      xs.plaza='1'
-   //                      xs.source='TIZIMIN'
-   //                      xs.sourcePlaceLat='555335'
-   //                      xs.sourcePlaceLng='-44'
-   //                      xs.status='Open'
-   //                      this.groceries.push(xs);
-   //                      this.groceries.push(xs);
-   //                      this.groceries.push(xs);
-
-
+       console.log(this.timestartSearch);
   }
   groceries=[];
   timestartSearch=null;
@@ -89,14 +69,14 @@ export class HomePage {
   numeroplazasBuscar=1;
 
   activarfiltro(){
-      console.log("activar filtro",this.source,this.destino,this.givemeFormatDate(this.timestartSearch),this.givemeFormatDate(this.timeEndSearch),this.numeroplazasBuscar);
+      // console.log("activar filtro",this.source,this.destino,this.givemeFormatDate(this.timestartSearch),this.givemeFormatDate(this.timeEndSearch),this.numeroplazasBuscar);
         this.tripServiceProvider.getListFilters(this.source, this.destino,this.givemeFormatDate(this.timestartSearch),this.givemeFormatDate(this.timeEndSearch),this.numeroplazasBuscar).subscribe(
               responseUserService => {
-                console.log('paso por aqui en el validate login',responseUserService);
+                // console.log('paso por aqui en el validate login',responseUserService);
                 if (responseUserService) {
                   // this.loader.dismiss();
                   this.groceries=[];
-                  console.log('paso por aqui en el validate login',responseUserService);
+                  // console.log('paso por aqui en el validate login',responseUserService);
                   if(responseUserService.length!=0){
                       for (var i = 0; i < responseUserService.length; ++i) {
                         var x = new TripModel();
@@ -134,7 +114,8 @@ export class HomePage {
             );
   }
 ionViewDidEnter() {
-    this.activarfiltro();
+  console.log(this.timestartSearch);
+    // this.activarfiltro();
 }
 
   givemeFormatDate(newDateconvert:String){
@@ -161,12 +142,10 @@ ionViewDidEnter() {
     }
 
 formatDateCorrect=newDate.getFullYear()+'-'+month+'-'+day+' '+minutes+':'+segundos+':'+'00';
-console.log('que estamos enviando',formatDateCorrect);
+// console.log('que estamos enviando',formatDateCorrect);
       return formatDateCorrect.toString();
   }
-test(value:any){
-  // console.log(value);
-}
+
 
  showAlert(mesage :string) {
   let tittle;
@@ -194,7 +173,7 @@ test(value:any){
 
   ionViewDidLoad() {
     
-    // this.activarfiltro();
+    this.activarfiltro();
   }
 
   setHour(){
@@ -221,13 +200,12 @@ test(value:any){
    
    
    
-    // console.log('timeStarts',this.timestartSearch);
-    // console.log('end ',this.timeEndSearch);
+    console.log('timeStarts',this.timestartSearch);
+    console.log('end ',this.timeEndSearch);
 
   }
 
   dateFunction(){
-    // console.log('date function test');
     this.activarfiltro();
   }
 

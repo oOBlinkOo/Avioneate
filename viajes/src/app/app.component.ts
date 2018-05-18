@@ -12,6 +12,8 @@ import { LoginPage } from '../pages/login/login';
 import {BasicParametersProvider} from '../providers/basic-parameters/basic-parameters';
 import { Subscription }   from 'rxjs';
 import { basicInfoModel} from '../model/basicInfoModel';
+import {TarjetaPage} from '../pages/tarjeta/tarjeta';
+import {PerfilPage} from '../pages/perfil/perfil';
 @Component({
   templateUrl: 'app.html'
 })
@@ -50,15 +52,24 @@ createTrip(){
   this.appCtrl.getRootNav().push(CreateTripPage,{
       basicInfoGlobal:this.basicInfoGlobal
   });
-  // this.appCtrl.get
-  // console.log("fack nose"+this.navParamsLocal.get('id_user'));
-  // console.log("fack nose"+this.navParams.lastname);
-  // console.log("fack nose"+this.navParams.id_user);
     this.menuCtrl.close();
-    //   this.nav.push(CreateTripPage,{
 
+}
 
-    //   });
+openTarjeta(){
+
+  this.appCtrl.getRootNav().push(TarjetaPage,{
+      basicInfoGlobal:this.basicInfoGlobal
+  });
+    this.menuCtrl.close();
+
+}
+
+getPersonalInfo(){
+    this.appCtrl.getRootNav().push(PerfilPage,{
+      basicInfoGlobal:this.basicInfoGlobal
+  });
+    this.menuCtrl.close();
 }
 
 

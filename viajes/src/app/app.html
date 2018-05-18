@@ -1,25 +1,35 @@
    <ion-menu [content]="mycontent">
-        <ion-content>
+        <ion-content >
           <ion-list>
-          <ion-item>          	
-            <ion-label (click)="createTrip()">
-             <button ion-button icon-only clear='true'>
-            	<ion-icon name="car" color='dark'></ion-icon>            	
-            </button> Create Trip
+          <ion-item  class='mouseovermenu'>            
+          <ion-label text-left (click)="getPersonalInfo()">
+              <ion-icon *ngIf='basicInfoGlobal!=null' name="contact" color='dark' class='userpngMnu'> Personal Info ({{basicInfoGlobal.id_user}})
+              </ion-icon> 
+              <ion-icon *ngIf='basicInfoGlobal==null' name="contact" color='dark' class='userpngMnu'> Personal Info null
+              </ion-icon> 
+            </ion-label>            
+          </ion-item>
+
+          <ion-item  class='mouseovermenu'>          	
+            <ion-label  text-left (click)="createTrip()">
+            	<ion-icon name="car" color='dark' class='userpngMnu'> Crear Trip</ion-icon>            	
             </ion-label>
           </ion-item>
-            <ion-item>
-           
-            <ion-label>   <button ion-button icon-only clear='true'>
-            	<ion-icon name="search" color='dark'></ion-icon>            	
-            </button> Search</ion-label>
+
+
+            <ion-item class='mouseovermenu'>           
+              <ion-label text-left>   
+              	<ion-icon name="search" color='dark' class='userpngMnu'> Search</ion-icon>            	
+              </ion-label>
             </ion-item>
-            <ion-item>
-            
-            <ion-label><button ion-button icon-only clear='true'>
-            	<ion-icon name="card" color='dark'></ion-icon>            	
-            </button> Payments</ion-label>
+
+            <ion-item  class='mouseovermenu'>            
+              <ion-label text-left (click)='openTarjeta()'>
+              	<ion-icon name="card" color='dark' class='userpngMnu'> Tarjeta</ion-icon>            	
+              </ion-label>
             </ion-item>
+
+
           </ion-list>  
         </ion-content>
       </ion-menu>
