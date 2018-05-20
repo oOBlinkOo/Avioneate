@@ -85,6 +85,7 @@ crearTarjeta(){
 	}else {
 		console.log('NOT READY TO SEND !!!!!!!!!!!!!!!!!!');
 	}
+  
 }
 
 sendtoService(){

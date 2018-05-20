@@ -74,7 +74,15 @@ export class NextConfigurationPage {
    }else {
        minutes=newDate.getMinutes();
    }
-   this.timeStarts=newDate.getHours()+':'+minutes;
+
+    var hora2;
+   if(newDate.getHours().toString().length<2){
+        hora2='0'+newDate.getHours();
+   }else {
+     hora2=newDate.getHours();
+   }
+
+   this.timeStarts=hora2+':'+minutes;
    var month=newDate.getMonth()+1;
    this.timeStartsFecha=newDate.getFullYear().toString()+'-0'+month+'-'+newDate.getDate();
     console.log('timeStarts',this.timeStarts,this.timeStartsFecha);
@@ -203,7 +211,7 @@ console.log('que estamos enviando',formatDateCorrect);
    showAlertSuccesfull(mesage :string) {
  
     let alert = this.alertCtrl.create({
-      title: "Trip created Succesfull with id:" +mesage,
+      title: "Viaje Creado Exitosamente Id:" +mesage,
       subTitle: "Done",
       buttons: ['Ok']
     });

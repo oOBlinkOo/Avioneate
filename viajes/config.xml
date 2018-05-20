@@ -85,6 +85,5 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
         <string>We want your location! Best regards NSA</string>
     </edit-config>
-  
     <engine name="android" spec="7.0.0" />
 </widget>

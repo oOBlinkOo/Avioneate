@@ -44,10 +44,10 @@ validateLogin(){
   this.presentLoading();
          this.userService.login(this.username, this.password).subscribe(
               responseUserService => {
-                console.log('paso por aqui en el validate login',responseUserService);
+                // console.log('paso por aqui en el validate login',responseUserService);
                 if (responseUserService) {
                   // this.loader.dismiss();
-                  console.log('paso por aqui en el validate login',responseUserService);
+                  // console.log('paso por aqui en el validate login',responseUserService);
                    this.navCtrl.setRoot(HomePage, {
                       name: responseUserService[0].name,
                       lastname: responseUserService[0].lastname,

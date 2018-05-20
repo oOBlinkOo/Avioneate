@@ -26,7 +26,7 @@ export class UserServiceProvider {
 
     login(email, password) {
     var credentials = { email: email, password: password};
-    console.log ('llamando al api HERE ',email,password);
+    // console.log ('llamando al api HERE ',email,password);
     return this.http.post(this.baseUrl + '/user/login', credentials,this.options).map(responseObject => {
         if(responseObject.status == 200)
           return responseObject.json();
@@ -41,7 +41,7 @@ export class UserServiceProvider {
                         email:email,
                         password: password
                       };
-    console.log ('llamando al api HERE ',name,lastname,email,password);
+    // console.log ('llamando al api HERE ',name,lastname,email,password);
     return this.http.post(this.baseUrl + '/user/createAccount', credentials,this.options).map(responseObject => {
         if(responseObject.status == 200)
           return responseObject.json();
@@ -51,8 +51,8 @@ export class UserServiceProvider {
   }
 
   getUser(user_id) {
-      console.log('OMGGGGGGGG',user_id);
-    console.log ('llamando al api HERE ');
+    //   console.log('OMGGGGGGGG',user_id);
+    // console.log ('llamando al api HERE ');
     return this.http.get(this.baseUrl + '/user/getUser/'+user_id, this.options).map(responseObject => {
         if(responseObject.status == 200)
           return responseObject.json();
@@ -64,7 +64,7 @@ export class UserServiceProvider {
 
       createTarjeta(id_user, numeroTarjeta,vigencia,cvv) {
     var credentials = { id_user: id_user, numeroTarjeta: numeroTarjeta ,vigencia:vigencia ,cvv:cvv};
-    console.log ('llamando al api HERE ');
+    // console.log ('llamando al api HERE ');
     return this.http.post(this.baseUrl + '/user/createTarjeta', credentials,this.options).map(responseObject => {
         if(responseObject.status == 200)
           return responseObject.json();
@@ -74,8 +74,8 @@ export class UserServiceProvider {
   }
 
     getTarjeta(user_id) {
-      console.log('OMGGGGGGGG',user_id);
-    console.log ('llamando al api HERE ');
+    //   console.log('OMGGGGGGGG',user_id);
+    // console.log ('llamando al api HERE ');
     return this.http.get(this.baseUrl + '/user/getTarjeta/'+user_id, this.options).map(responseObject => {
         if(responseObject.status == 200)
           return responseObject.json();
@@ -90,7 +90,7 @@ export class UserServiceProvider {
      lastname:lastname ,
      password:password
    };
-    console.log ('llamando al api HERE ');
+    // console.log ('llamando al api HERE ');
     return this.http.post(this.baseUrl + '/user/updateUser', credentials,this.options).map(responseObject => {
         if(responseObject.status == 200)
           return responseObject.json();
@@ -99,6 +99,28 @@ export class UserServiceProvider {
     });
   }
 
+    getPicks(id_pick) {
+      // console.log('OMGGGGGGGG',id_pick);
+    // console.log ('llamando al api HERE ');
+    return this.http.get(this.baseUrl + '/user/getPicks/'+id_pick, this.options).map(responseObject => {
+        if(responseObject.status == 200)
+          return responseObject.json();
+        else
+          return false;
+    });
+  }
+
+
+      reservar(id_trip, id_user,id_pick,plaza,plazaUsuario) {
+    var credentials = { id_trip: id_trip, id_user: id_user ,id_pick:id_pick,plaza:plaza,plazaUsuario:plazaUsuario};
+    // console.log ('llamando al api HERE ');
+    return this.http.post(this.baseUrl + '/user/reservar', credentials,this.options).map(responseObject => {
+        if(responseObject.status == 200)
+          return responseObject.json();
+        else
+          return false;
+    });
+  }
 
 
 }

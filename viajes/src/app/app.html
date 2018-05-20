@@ -3,29 +3,40 @@
           <ion-list>
           <ion-item  class='mouseovermenu'>            
           <ion-label text-left (click)="getPersonalInfo()">
-              <ion-icon *ngIf='basicInfoGlobal!=null' name="contact" color='dark' class='userpngMnu'> Personal Info ({{basicInfoGlobal.id_user}})
+              <ion-icon *ngIf='basicInfoGlobal!=null' name="contact" color='dark' class='userpngMnu'> Mi Perfil
               </ion-icon> 
-              <ion-icon *ngIf='basicInfoGlobal==null' name="contact" color='dark' class='userpngMnu'> Personal Info null
+              <ion-icon *ngIf='basicInfoGlobal==null' name="contact" color='dark' class='userpngMnu'> Mi Perfil
               </ion-icon> 
-            </ion-label>            
+            </ion-label> 
+            <ion-label *ngIf='basicInfoGlobal!=null'>
+              ({{basicInfoGlobal.name}})
+            </ion-label>           
           </ion-item>
 
           <ion-item  class='mouseovermenu'>          	
             <ion-label  text-left (click)="createTrip()">
-            	<ion-icon name="car" color='dark' class='userpngMnu'> Crear Trip</ion-icon>            	
+            	<ion-icon name="car" color='dark' class='userpngMnu'> Crear Viaje</ion-icon>            	
             </ion-label>
           </ion-item>
 
 
-            <ion-item class='mouseovermenu'>           
+          <ion-item  class='mouseovermenu'>           
+            <ion-label  text-left (click)="misViajes()">
+              <ion-icon name="bus" color='dark' class='userpngMnu'> Mis viajes</ion-icon>              
+            </ion-label>
+          </ion-item>
+
+
+
+       <!--      <ion-item class='mouseovermenu'>           
               <ion-label text-left>   
               	<ion-icon name="search" color='dark' class='userpngMnu'> Search</ion-icon>            	
               </ion-label>
-            </ion-item>
+            </ion-item> -->
 
             <ion-item  class='mouseovermenu'>            
               <ion-label text-left (click)='openTarjeta()'>
-              	<ion-icon name="card" color='dark' class='userpngMnu'> Tarjeta</ion-icon>            	
+              	<ion-icon name="card" color='dark' class='userpngMnu'> Mi Tarjeta</ion-icon>            	
               </ion-label>
             </ion-item>
 

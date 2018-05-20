@@ -23,7 +23,8 @@ import {DetailTripPage} from '../detail-trip/detail-trip'
   templateUrl: 'home.html',
 })
 export class HomePage {
-
+  timestartSearch=null;
+  timeEndSearch=null;
   constructor(public navCtrl: NavController, public navParams: NavParams
     ,    public  basicParametersProvider:BasicParametersProvider,
     public alertCtrl: AlertController,
@@ -31,51 +32,42 @@ export class HomePage {
     public tripServiceProvider:TripServiceProvider,
     public appCtrl: App
     ) {
-      this.id_user = navParams.get('id_user');
-     this.name = navParams.get('name');
-     this.lastname = navParams.get('lastname');
-     this.password = navParams.get('password');
-     this.member_active = navParams.get('member_active');
-     this.email = navParams.get('email');
-     // basicInfoModel x = new basicInfoModel() ;
-     var x :basicInfoModel= new basicInfoModel() ;
-     x.id_user=this.id_user;
-     x.name=this.name;
-     x.lastname=this.lastname;
-     x.password=this.password;
-     x.member_active=this.member_active;
-     x.email=this.email;
+     this.x.id_user=navParams.get('id_user');
+     this.x.name=navParams.get('name');
+     this.x.lastname=navParams.get('lastname');
+     this.x.password=navParams.get('password');
+     this.x.member_active=navParams.get('member_active');
+     this.x.email= navParams.get('email');
      
-     this.basicParametersProvider.confirmMission(x);
+     this.basicParametersProvider.confirmMission(this.x);
      this.setHour();
      this.activarfiltro();
 
        console.log(this.timestartSearch);
   }
+   x :basicInfoModel= new basicInfoModel() ;
   groceries=[];
-  timestartSearch=null;
-  timeEndSearch=null;
+  groceriesv2=[];
+  getfullCar=[];
+
   source='Mérida';
   destino='Tizimín';
   loader :any;
+ 
 
   rootpage=RegisterAccountPage;
-  id_user=null;
-  name=null;
-  lastname=null;
-  password=null;
-  member_active=null;
-  email=null;
   numeroplazasBuscar=1;
 
   activarfiltro(){
-      // console.log("activar filtro",this.source,this.destino,this.givemeFormatDate(this.timestartSearch),this.givemeFormatDate(this.timeEndSearch),this.numeroplazasBuscar);
+      console.log("activar filtro",this.timestartSearch,this.timeEndSearch);
         this.tripServiceProvider.getListFilters(this.source, this.destino,this.givemeFormatDate(this.timestartSearch),this.givemeFormatDate(this.timeEndSearch),this.numeroplazasBuscar).subscribe(
               responseUserService => {
-                // console.log('paso por aqui en el validate login',responseUserService);
+                console.log('paso por aqui en el validate login',responseUserService);
                 if (responseUserService) {
                   // this.loader.dismiss();
                   this.groceries=[];
+                  this.groceriesv2=[];
+                  this.getfullCar=[];
                   // console.log('paso por aqui en el validate login',responseUserService);
                   if(responseUserService.length!=0){
                       for (var i = 0; i < responseUserService.length; ++i) {
@@ -93,13 +85,18 @@ export class HomePage {
                         x.sourcePlaceLat=responseUserService[i].sourcePlaceLat;
                         x.sourcePlaceLng=responseUserService[i].sourcePlaceLng;
                         x.status=responseUserService[i].status;
-                        this.groceries.push(x);
+
+                        this.groceriesv2.push(x);
+                        this.testMoreComplext(x);
+
                       }
 
 
                   }else{
                     // es vacio el length
                     this.groceries=[];
+                    this.groceriesv2=[];
+                    this.getfullCar=[]
                   }
                   
                 
@@ -113,16 +110,88 @@ export class HomePage {
               }
             );
   }
-ionViewDidEnter() {
-  console.log(this.timestartSearch);
-    // this.activarfiltro();
+
+  testMoreComplext(trip:TripModel){
+          this.tripServiceProvider.getFullCar(trip.id_trip).subscribe(
+              responseUserService => {
+                console.log('getFullCar',responseUserService);
+                if (responseUserService) {
+                  // this.loader.dismiss();
+                  this.getfullCar.push(responseUserService);
+                  console.log('esta volviendo full car',responseUserService);  
+                  if(this.getfullCar.length==this.groceriesv2.length){
+                    console.log(this.getfullCar);
+
+
+                      for (var i = 0; i < this.getfullCar.length; ++i) {
+                        console.log('valor de i deben ser 3'+i);
+                        if(this.getfullCar[i]!=0){
+                          console.log('ya entro que paso',this.getfullCar[i]);
+                          var assientosOcupados=0;
+                          for (var p = 0; p < this.getfullCar[i].length; ++p) {
+                            // code...
+                            
+                            assientosOcupados=assientosOcupados+parseInt(this.getfullCar[i][p].plazaOcupada);
+                          }
+                          console.log('cuantos asientos llenos',assientosOcupados);
+                          if(assientosOcupados+this.numeroplazasBuscar<=this.groceriesv2[i].plaza){
+                              this.groceries.push(this.groceriesv2[i]);
+                          }
+                        }else {
+                          console.log('2 no tenian valors');
+                          this.groceries.push(this.groceriesv2[i]);
+                          for (var i = 0; i < this.groceries.length; ++i) {
+                            // code...
+                            this.groceries[i]['stars2']=[];
+                            var numero=this.getRandomInt(1,5);
+                            console.log(this.groceries[i]);
+                              for (var p = 0; p <numero; ++p) {
+                                   this.groceries[i]['stars2'].push('test');
+                              }
+                            
+                      
+                          }
+                        }
+
+
+                            
+                          
+                      }
+                  }                
+              
+                }
+              
+              },  (error)=>   {
+                console.log(error);
+                this.showAlert('A error full car calling the system');
+              }
+            );
+  }
+
+ getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+
   givemeFormatDate(newDateconvert:String){
-// console.log(newDateconvert);
+console.log(newDateconvert);
     var newDate= new Date();
+    console.log(newDateconvert.toString().length);
+        var hora;
+        
     var minutes=newDateconvert.substring(0,2);
-    var segundos=newDateconvert.substring(3,newDateconvert.length);
+    if(newDateconvert.toString().length==4){
+         hora=newDateconvert.substring(0,1);
+        minutes= newDateconvert.substring(2,newDateconvert.length);
+    }
+
+    if(newDateconvert.toString().length==5){
+         hora=newDateconvert.substring(0,2);
+        minutes= newDateconvert.substring(3,newDateconvert.length);
+    }
+
+
+    
 
     var formatDateCorrect:string=null;
     var month;
@@ -141,8 +210,10 @@ ionViewDidEnter() {
       day=newDate.getDate();
     }
 
-formatDateCorrect=newDate.getFullYear()+'-'+month+'-'+day+' '+minutes+':'+segundos+':'+'00';
-// console.log('que estamos enviando',formatDateCorrect);
+
+formatDateCorrect=newDate.getFullYear()+'-'+month+'-'+day+' '+hora+':'+minutes+':'+'00';
+// formatDateCorrect=newDate.getFullYear()+'-'+month+'-'+day+' '+hora+':'+minutes+":"+00;
+console.log('que estamos enviando',formatDateCorrect);
       return formatDateCorrect.toString();
   }
 
@@ -179,6 +250,7 @@ formatDateCorrect=newDate.getFullYear()+'-'+month+'-'+day+' '+minutes+':'+segund
   setHour(){
        var  newDate = new Date();
    var minutes;
+   console.log(newDate.getMinutes());
    if(newDate.getMinutes()<10){
        minutes='0'+newDate.getMinutes();
    }else {
@@ -195,8 +267,22 @@ formatDateCorrect=newDate.getFullYear()+'-'+month+'-'+day+' '+minutes+':'+segund
    }
 
 
-   this.timestartSearch=newDate.getHours()+':'+minutes;
-   this.timeEndSearch=newDate2.getHours()+':'+minutes2;
+   var hora1;
+   if(newDate.getHours().toString().length<2){
+        hora1='0'+newDate.getHours();
+   }else {
+     hora1=newDate.getHours();
+   }
+   var hora2;
+   if(newDate2.getHours().toString().length<2){
+        hora2='0'+newDate2.getHours();
+   }else {
+     hora2=newDate2.getHours();
+   }
+
+
+   this.timestartSearch=hora1+':'+minutes;
+   this.timeEndSearch=hora2+':'+minutes2;
    
    
    
@@ -236,10 +322,15 @@ formatDateCorrect=newDate.getFullYear()+'-'+month+'-'+day+' '+minutes+':'+segund
   }
 
 
-openDetail(object:TripModel){
+openDetail(tripdetail:TripModel){
 
   this.appCtrl.getRootNav().push(DetailTripPage,{
-        object:object
+        object:tripdetail,
+        basicInfo:this.x,
+        numeroplazasBuscar:this.numeroplazasBuscar
+
+        // basicInfo:this.ba
+
   });
 
 }

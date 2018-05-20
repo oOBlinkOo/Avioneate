@@ -64,5 +64,36 @@ export class TripServiceProvider {
     });
   }
 
+    getListbyUser(id_user) {
+    return this.http.get(this.baseUrl + '/trip/getListbyUser/'+id_user).map(responseObject => {
+        if(responseObject.status == 200)
+          return responseObject.json();
+        else
+          return false;
+    });
+  }
+
+    closeTrip(id_trip) {
+    return this.http.get(this.baseUrl + '/trip/closeTrip/'+id_trip).map(responseObject => {
+        if(responseObject.status == 200)
+          return responseObject.json();
+        else
+          return false;
+    });
+  }
+
+
+     getFullCar(id_trip) {
+      console.log('OMGGGGGGGG');
+    console.log ('llamando al api HERE ');
+    return this.http.get(this.baseUrl + '/trip/getFullCar/'+id_trip, this.options).map(responseObject => {
+        if(responseObject.status == 200)
+          return responseObject.json();
+        else
+          return false;
+    });
+  }
+
+
 
 }

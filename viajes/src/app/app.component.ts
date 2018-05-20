@@ -14,6 +14,7 @@ import { Subscription }   from 'rxjs';
 import { basicInfoModel} from '../model/basicInfoModel';
 import {TarjetaPage} from '../pages/tarjeta/tarjeta';
 import {PerfilPage} from '../pages/perfil/perfil';
+import {MytripsPage} from '../pages/mytrips/mytrips';
 @Component({
   templateUrl: 'app.html'
 })
@@ -67,6 +68,12 @@ openTarjeta(){
 
 getPersonalInfo(){
     this.appCtrl.getRootNav().push(PerfilPage,{
+      basicInfoGlobal:this.basicInfoGlobal
+  });
+    this.menuCtrl.close();
+}
+misViajes(){
+    this.appCtrl.getRootNav().push(MytripsPage,{
       basicInfoGlobal:this.basicInfoGlobal
   });
     this.menuCtrl.close();

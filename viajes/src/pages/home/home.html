@@ -21,15 +21,15 @@
 
 <ion-content padding class='fondo'>
 	<ion-row>
-		<ion-col col-2>
-			<ion-label  item-star>Start</ion-label>			
+		<ion-col col-4>
+			<ion-label  item-star>Buscar:</ion-label>			
 		</ion-col>	
 		<ion-col col-4>
 			<ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="timestartSearch" (ionChange)='dateFunction()'></ion-datetime>
 		</ion-col>	
-		<ion-col col-2>
-			<ion-label item-end>End</ion-label>	
-		</ion-col>	
+	<!-- 	<ion-col col-1>
+			<ion-label item-end>Fin</ion-label>	
+		</ion-col>	 -->
 		<ion-col col-4>
 			<ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="timeEndSearch" (ionChange)='dateFunction()'></ion-datetime>
 		</ion-col>	
@@ -63,22 +63,22 @@
 	</ion-row>
 
 	<ion-list>
-			<!-- <ion-item *ngFor="let trip of groceries">
-					
-							<ion-label item-start>Parte de: {{trip.source}}</ion-label>						
-							<ion-label item-start>Plaza: {{trip.plaza}}</ion-label>
-							<ion-icon name="star" color='dark'></ion-icon>					
-							<ion-label item-start>llega: {{trip.destino}}</ion-label>
-				</ion-item> -->
-	
+
 			
 					<ion-row *ngFor="let trip of groceries" class='border'>
 						<ion-col (click)='openDetail(trip)'>
 									<ion-row>
 										<ion-col col-3>
+										<ion-row>
+											<ion-col>
+												<ion-icon name="contact" class='userpng'></ion-icon>	
+											</ion-col>
+											<ion-col>
+												<ion-label text-center> {{trip.id_trip}}</ion-label>
+											</ion-col>
+										</ion-row>
 
-
-											<ion-icon name="contact" class='userpng'></ion-icon>
+											
 										</ion-col>
 										<ion-col col-9 >
 												<ion-row>
@@ -94,9 +94,9 @@
 													<ion-col>
 															<ion-label item-start>Hacia: {{trip.destino}}</ion-label>
 													</ion-col>
-													<ion-col>
-															<ion-icon name="star" ></ion-icon>
-															<!-- <ion-label item-start><ion-icon name="star" color='dark'></ion-icon></ion-label> -->
+													<ion-col >
+															<ion-icon *ngFor='let x of  trip.stars2' name="star" ></ion-icon>
+													
 													</ion-col>										
 												</ion-row>
 

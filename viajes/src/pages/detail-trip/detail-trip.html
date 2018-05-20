@@ -7,18 +7,23 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Detail of trip</ion-title>
+    <ion-title>Detalle del viaje</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding class='fondo'>
+<ion-row *ngIf='activaTarjeta==null' class="alert alert-warning">
+  <ion-label>
+    Configure your account with one administrator.
+  </ion-label>
+</ion-row>
 <ion-item  text-center class='fondo'><ion-label center>Conductor</ion-label></ion-item>
 <ion-item    text-center class='fondo'><ion-icon name="contact" class='userpng'></ion-icon></ion-item>
 
 <ion-item  text-center class='fondo'>
-	<ion-label>Juan Manuel</ion-label>
+	<ion-label *ngIf='basicInfoChoffer!=null'>{{basicInfoChoffer.name}} {{basicInfoChoffer.lastname}}</ion-label>
 </ion-item>
 <!-- <ion-row><ion-col>  -->
 	<ion-item  text-center class='fondo'>
@@ -26,26 +31,33 @@
 	</ion-item>
 	<ion-item  class='fondo'>
 		<ion-label   class='fondo'>Hora:</ion-label>
-		<ion-label   class='fondo'>{{object.hora}}</ion-label>
+		<ion-datetime  disabled=true displayFormat="MMMM DD HH:mm A" pickerFormat="MMMM MM" [(ngModel)]="triphoraformat"></ion-datetime>
+		<!-- <ion-label   class='fondo'>{{triphoraformat}}</ion-label> -->
 	</ion-item>
 		<ion-item class='fondo'>
 				<ion-label>De:</ion-label>
-				<ion-label>{{object.source}}</ion-label>
+				<ion-label>{{trip.source}}</ion-label>
 		</ion-item >
 		<ion-item class='fondo'>
 				<ion-label>Llega:</ion-label>
-				<ion-label>{{object.destino}}</ion-label>
+				<ion-label>{{trip.destino}}</ion-label>
+		</ion-item>
+
+			<ion-item class='fondo'>
+				<ion-label>Plazas:</ion-label>
+				<ion-label>{{trip.plaza}}</ion-label>
 		</ion-item>
 <ion-item class='fondo'>
 	<ion-label>Pick up</ion-label>
-	<ion-select [(ngModel)]='gender'>
-		<ion-option value='f'>Female</ion-option>
-		<ion-option value='m'>Male</ion-option>
+	<ion-select [(ngModel)]='pickupSelected' multiple="false">
+
+		<ion-option *ngFor="let pick of listPicks; let i = index" value="{{pick.id_pick}}">{{pick.localization}}</ion-option>
+		
 	</ion-select>
 </ion-item>
 
 
 
-	<button ion-button color="primary" block class='bigger'(click)='validateLogin()'>Reservar</button>	
+	<button *ngIf="activaTarjeta!=null&&pickupSelected!=null&&basicInfoUser!=null && basicInfoChoffer!=null && basicInfoChoffer.id_user!=basicInfoUser.id_user " ion-button color="primary" block class='bigger'(click)='reservar()'>Reservar</button>	
 
 </ion-content>

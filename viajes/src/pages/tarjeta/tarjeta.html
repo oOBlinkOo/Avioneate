@@ -44,7 +44,7 @@
 
 		</ion-col>
 	</ion-row>
-	<button  *ngIf='validCard && validCvv && fechaVigencia!=null' ion-button color="primary" block (click)='crearTarjeta()'>Agrega tu tarjeta</button>
+	<button  *ngIf='validCard && validCvv && fechaVigencia!=null && activaTarjeta==null' ion-button color="primary" block (click)='crearTarjeta()'>Agrega tu tarjeta</button>
 <!-- </ion-item> -->
 
 <ion-row *ngIf='activaTarjeta!=null' class='fondo'>
@@ -66,7 +66,7 @@
 		</ion-item>
 		<ion-item  class='fondo'>
 			<ion-label>
-			Date Vigencia
+			Fecha Vigencia
 			</ion-label>	
 			<ion-label>
 			{{activaTarjeta.date_vigencia}}
@@ -74,7 +74,7 @@
 		</ion-item>
 		<ion-item  class='fondo'>
 			<ion-label>
-			cvv
+			CVV
 			</ion-label>	
 			<ion-label >
 			***
